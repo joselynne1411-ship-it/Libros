@@ -1,0 +1,206 @@
+// Prisma schema — Wiki Dinámica de Worldbuilding
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  books Book[]
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  mapImageUrl String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  characters     Character[]
+  locations      Location[]
+  timelineEvents TimelineEvent[]
+  items          Item[]
+  chapters       Chapter[]
+  relations      CharacterRelation[]
+
+  @@index([ownerId])
+}
+
+enum CharacterStatus {
+  ALIVE
+  DECEASED
+  MISSING
+  UNKNOWN
+}
+
+model Character {
+  id          String          @id @default(cuid())
+  name        String
+  alias       String?
+  description String?
+  avatarUrl   String?
+  status      CharacterStatus @default(ALIVE)
+  statusNote  String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  appearances   ChapterAppearance[]
+  itemsOwned    Item[]                   @relation("ItemOwner")
+  timelineLinks TimelineEventCharacter[]
+
+  relationsFrom CharacterRelation[] @relation("RelationFrom")
+  relationsTo   CharacterRelation[] @relation("RelationTo")
+
+  @@index([bookId])
+}
+
+enum RelationType {
+  PARENT_OF
+  SIBLING_OF
+  MARRIED_TO
+  PARTNER_OF
+  MENTOR_OF
+  ENEMY_OF
+  FRIEND_OF
+  OTHER
+}
+
+model CharacterRelation {
+  id   String       @id @default(cuid())
+  type RelationType
+  note String?
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  fromId String
+  from   Character @relation("RelationFrom", fields: [fromId], references: [id], onDelete: Cascade)
+
+  toId String
+  to   Character @relation("RelationTo", fields: [toId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([bookId])
+  @@index([fromId])
+  @@index([toId])
+}
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  xPercent    Float?
+  yPercent    Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  timelineEvents TimelineEvent[]
+  items          Item[]
+
+  @@index([bookId])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  title     String
+  order     Int
+  summary   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  appearances ChapterAppearance[]
+
+  @@index([bookId])
+}
+
+model ChapterAppearance {
+  id            String  @id @default(cuid())
+  statusAtPoint String?
+  notes         String?
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@unique([chapterId, characterId])
+  @@index([characterId])
+}
+
+model Item {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  ownerId String?
+  owner   Character? @relation("ItemOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+
+  locationId String?
+  location   Location? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+
+  @@index([bookId])
+}
+
+model TimelineEvent {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  locationId String?
+  location   Location? @relation(fields: [locationId], references: [id], onDelete: SetNull)
+
+  characters TimelineEventCharacter[]
+
+  @@index([bookId])
+}
+
+model TimelineEventCharacter {
+  id String @id @default(cuid())
+
+  eventId String
+  event   TimelineEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, characterId])
+  @@index([characterId])
+}
