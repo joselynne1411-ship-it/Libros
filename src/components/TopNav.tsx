@@ -6,7 +6,7 @@ export function TopNav({ userName }: { userName: string }) {
     <header className="flex items-center justify-between border-b border-pink-100 bg-white/70 px-6 py-3 backdrop-blur-sm">
       <Link
         href="/libros"
-        className="flex items-center gap-2 text-lg font-bold text-rose-950"
+        className="flex items-center gap-2 text-lg font-bold text-rose-700"
       >
         <span aria-hidden>🌸</span> Libros
       </Link>
@@ -17,7 +17,7 @@ export function TopNav({ userName }: { userName: string }) {
         <form action={signOutAction}>
           <button
             type="submit"
-            className="rounded-full px-3 py-1.5 font-medium text-pink-600 transition hover:bg-pink-50"
+            className="rounded-full px-3 py-1.5 font-medium text-pink-400 transition hover:bg-pink-50"
           >
             Cerrar sesión
           </button>

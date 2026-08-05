@@ -64,7 +64,7 @@ export default async function FamilyTreePage({
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>🌳</span> Árbol genealógico
         </h2>
         {roots.length > 0 ? (
@@ -82,7 +82,7 @@ export default async function FamilyTreePage({
       </section>
 
       <section>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>💞</span> Otras relaciones
         </h2>
         {otherRelations.length > 0 ? (

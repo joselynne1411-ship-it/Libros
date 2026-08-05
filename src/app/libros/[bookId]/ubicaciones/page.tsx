@@ -65,7 +65,7 @@ export default async function LocationsPage({
         {locations.map((l) => (
           <div key={l.id} className={`flex items-start justify-between gap-4 ${card}`}>
             <div>
-              <p className="flex items-center gap-2 font-semibold text-rose-950">
+              <p className="flex items-center gap-2 font-semibold text-rose-700">
                 <span aria-hidden>📍</span> {l.name}
               </p>
               {l.description && (
@@ -87,7 +87,7 @@ export default async function LocationsPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>✨</span> Nueva ubicación
         </h2>
         <form action={create} className="flex flex-col gap-3">

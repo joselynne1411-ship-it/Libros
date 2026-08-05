@@ -38,7 +38,7 @@ export default async function ItemsPage({
         {items.map((item) => (
           <div key={item.id} className={card}>
             <div className="flex items-start justify-between">
-              <p className="flex items-center gap-2 font-semibold text-rose-950">
+              <p className="flex items-center gap-2 font-semibold text-rose-700">
                 <span aria-hidden>🗝️</span> {item.name}
               </p>
               <form
@@ -79,7 +79,7 @@ export default async function ItemsPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>✨</span> Nuevo objeto
         </h2>
         <form action={create} className="flex flex-col gap-3">

@@ -32,7 +32,7 @@ export default async function CharactersPage({
         {characters.map((c) => (
           <Link key={c.id} href={`/libros/${bookId}/personajes/${c.id}`} className={cardHover}>
             <div className="flex items-center justify-between">
-              <p className="flex items-center gap-2 font-semibold text-rose-950">
+              <p className="flex items-center gap-2 font-semibold text-rose-700">
                 <span aria-hidden>👤</span> {c.name}
               </p>
               <span
@@ -54,7 +54,7 @@ export default async function CharactersPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>✨</span> Nuevo personaje
         </h2>
         <form action={create} className="flex flex-col gap-3">

@@ -8,7 +8,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 const initialState: FormState = { error: null };
 
 const inputClass =
-  "rounded-xl border border-pink-100 bg-white px-3 py-2 text-rose-950 outline-none transition focus:border-pink-400 focus:ring-2 focus:ring-pink-100";
+  "rounded-xl border border-pink-100 bg-white px-3 py-2 text-rose-900 outline-none transition focus:border-pink-300 focus:ring-2 focus:ring-pink-50";
 
 export default function LoginPage() {
   const [state, formAction] = useActionState(loginAction, initialState);
@@ -17,7 +17,7 @@ export default function LoginPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-sm flex-col justify-center px-4">
       <div className="mb-6 text-center">
         <div className="text-4xl">🌸</div>
-        <h1 className="mt-2 text-2xl font-bold text-rose-950">
+        <h1 className="mt-2 text-2xl font-bold text-rose-700">
           Bienvenida de vuelta
         </h1>
         <p className="text-sm text-rose-900/50">Inicia sesión en Libros</p>
@@ -44,7 +44,7 @@ export default function LoginPage() {
       </form>
       <p className="mt-4 text-center text-sm text-rose-900/50">
         ¿No tienes cuenta?{" "}
-        <Link href="/registro" className="font-medium text-pink-600 hover:underline">
+        <Link href="/registro" className="font-medium text-pink-400 hover:underline">
           Regístrate
         </Link>
       </p>

@@ -39,7 +39,7 @@ export default async function ChaptersPage({
               <p className={`text-xs font-medium ${muted}`}>
                 📖 Cap. {chapter.order}
               </p>
-              <p className="font-semibold text-rose-950">{chapter.title}</p>
+              <p className="font-semibold text-rose-700">{chapter.title}</p>
               {chapter.summary && (
                 <p className={`mt-1 text-sm ${muted}`}>{chapter.summary}</p>
               )}
@@ -65,7 +65,7 @@ export default async function ChaptersPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>✨</span> Nuevo capítulo
         </h2>
         <form action={create} className="flex flex-col gap-3">

@@ -78,7 +78,7 @@ export function MapEditor({
             onClick={() => setSelectedId(l.id === selectedId ? null : l.id)}
             className={`flex items-center justify-between rounded-xl border px-2 py-1.5 text-left text-sm transition ${
               selectedId === l.id
-                ? "border-pink-400 bg-pink-50"
+                ? "border-pink-300 bg-pink-50"
                 : "border-pink-100 hover:border-pink-300"
             }`}
           >

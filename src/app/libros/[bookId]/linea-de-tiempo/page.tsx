@@ -34,17 +34,17 @@ export default async function TimelinePage({
 
   return (
     <div className="flex flex-col gap-8">
-      <ol className="flex flex-col gap-3 border-l-2 border-pink-200 pl-4">
+      <ol className="flex flex-col gap-3 border-l-2 border-pink-100 pl-4">
         {events.map((event) => (
           <li key={event.id} className="relative">
-            <span className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-pink-500 ring-4 ring-pink-100" />
+            <span className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-pink-400 ring-4 ring-pink-50" />
             <div className={`flex items-start justify-between gap-4 ${card}`}>
               <div>
                 <p className={`text-xs ${muted}`}>
                   ⏳ #{event.order}
                   {event.location && <> · 📍 {event.location.name}</>}
                 </p>
-                <p className="font-semibold text-rose-950">{event.title}</p>
+                <p className="font-semibold text-rose-700">{event.title}</p>
                 {event.description && (
                   <p className={`mt-1 text-sm ${muted}`}>{event.description}</p>
                 )}
@@ -83,7 +83,7 @@ export default async function TimelinePage({
       </ol>
 
       <div className={`max-w-lg ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>✨</span> Nuevo evento
         </h2>
         <form action={create} className="flex flex-col gap-3">

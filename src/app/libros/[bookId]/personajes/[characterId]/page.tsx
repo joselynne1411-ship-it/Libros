@@ -68,7 +68,7 @@ export default async function CharacterDetailPage({
     <div className="flex flex-col gap-8">
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-bold text-rose-950">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-rose-700">
             <span aria-hidden>👤</span> {character.name}
           </h2>
           {character.alias && (
@@ -84,7 +84,7 @@ export default async function CharacterDetailPage({
 
       <section className="grid gap-8 md:grid-cols-2">
         <form action={update} className="flex flex-col gap-3">
-          <h3 className="flex items-center gap-2 font-semibold text-rose-950">
+          <h3 className="flex items-center gap-2 font-semibold text-rose-700">
             <span aria-hidden>📝</span> Ficha
           </h3>
           <label className="flex flex-col gap-1 text-sm text-rose-900/70">
@@ -128,7 +128,7 @@ export default async function CharacterDetailPage({
 
         <div className="flex flex-col gap-4">
           <div>
-            <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+            <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
               <span aria-hidden>🗝️</span> Objetos que posee
             </h3>
             {character.itemsOwned.length > 0 ? (
@@ -155,7 +155,7 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>📖</span> Aparición en capítulos
         </h3>
         <p className={`mb-3 text-sm ${muted}`}>
@@ -183,14 +183,14 @@ export default async function CharacterDetailPage({
                       type="submit"
                       className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                         appearance
-                          ? "border-pink-500 bg-pink-500 text-white"
-                          : "border-pink-200 text-rose-900/60 hover:border-pink-400"
+                          ? "border-pink-200 bg-pink-300 text-white"
+                          : "border-pink-100 text-rose-900/60 hover:border-pink-300"
                       }`}
                     >
                       {appearance ? "✓ Aparece" : "No aparece"}
                     </button>
                   </form>
-                  <span className="text-sm font-medium text-rose-950">
+                  <span className="text-sm font-medium text-rose-900">
                     Cap. {chapter.order} — {chapter.title}
                   </span>
                 </div>
@@ -222,7 +222,7 @@ export default async function CharacterDetailPage({
                       />
                       <button
                         type="submit"
-                        className="shrink-0 rounded-full border border-pink-200 px-3 text-xs text-pink-600 hover:border-pink-400"
+                        className="shrink-0 rounded-full border border-pink-100 px-3 text-xs text-pink-400 hover:border-pink-300"
                       >
                         Guardar
                       </button>
@@ -241,7 +241,7 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
           <span aria-hidden>💞</span> Relaciones
         </h3>
         <ul className="mb-4 flex flex-col gap-1 text-sm">
