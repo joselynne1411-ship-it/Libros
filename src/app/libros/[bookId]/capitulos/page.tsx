@@ -39,7 +39,7 @@ export default async function ChaptersPage({
               <p className={`text-xs font-medium ${muted}`}>
                 📖 Cap. {chapter.order}
               </p>
-              <p className="font-semibold text-rose-700">{chapter.title}</p>
+              <p className="font-semibold text-black">{chapter.title}</p>
               {chapter.summary && (
                 <p className={`mt-1 text-sm ${muted}`}>{chapter.summary}</p>
               )}
@@ -65,11 +65,11 @@ export default async function ChaptersPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>✨</span> Nuevo capítulo
         </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Número
             <input
               name="order"
@@ -79,11 +79,11 @@ export default async function ChaptersPage({
               className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Título
             <input name="title" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Resumen (opcional)
             <textarea name="summary" rows={2} className={input} />
           </label>

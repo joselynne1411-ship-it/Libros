@@ -30,7 +30,7 @@ export function BookNav({ bookId }: { bookId: string }) {
             className={`flex items-center gap-1.5 rounded-t-lg px-3 py-2 text-sm transition ${
               active
                 ? "border-b-2 border-pink-300 font-medium text-pink-400"
-                : "text-rose-900/50 hover:text-rose-900"
+                : "text-black/50 hover:text-black"
             }`}
           >
             <span aria-hidden>{tab.icon}</span> {tab.label}

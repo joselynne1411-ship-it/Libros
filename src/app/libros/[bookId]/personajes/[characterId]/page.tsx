@@ -68,7 +68,7 @@ export default async function CharacterDetailPage({
     <div className="flex flex-col gap-8">
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-bold text-rose-700">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-black">
             <span aria-hidden>👤</span> {character.name}
           </h2>
           {character.alias && (
@@ -84,18 +84,18 @@ export default async function CharacterDetailPage({
 
       <section className="grid gap-8 md:grid-cols-2">
         <form action={update} className="flex flex-col gap-3">
-          <h3 className="flex items-center gap-2 font-semibold text-rose-700">
+          <h3 className="flex items-center gap-2 font-semibold text-black">
             <span aria-hidden>📝</span> Ficha
           </h3>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Nombre
             <input name="name" defaultValue={character.name} required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Alias
             <input name="alias" defaultValue={character.alias ?? ""} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Descripción
             <textarea
               name="description"
@@ -104,7 +104,7 @@ export default async function CharacterDetailPage({
               className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Estado actual
             <select name="status" defaultValue={character.status} className={input}>
               {Object.entries(statusLabels).map(([value, label]) => (
@@ -114,7 +114,7 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Nota sobre el estado
             <input
               name="statusNote"
@@ -128,7 +128,7 @@ export default async function CharacterDetailPage({
 
         <div className="flex flex-col gap-4">
           <div>
-            <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
+            <h3 className="mb-2 flex items-center gap-2 font-semibold text-black">
               <span aria-hidden>🗝️</span> Objetos que posee
             </h3>
             {character.itemsOwned.length > 0 ? (
@@ -155,7 +155,7 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>📖</span> Aparición en capítulos
         </h3>
         <p className={`mb-3 text-sm ${muted}`}>
@@ -184,13 +184,13 @@ export default async function CharacterDetailPage({
                       className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                         appearance
                           ? "border-pink-200 bg-pink-300 text-white"
-                          : "border-pink-100 text-rose-900/60 hover:border-pink-300"
+                          : "border-pink-100 text-black/60 hover:border-pink-300"
                       }`}
                     >
                       {appearance ? "✓ Aparece" : "No aparece"}
                     </button>
                   </form>
-                  <span className="text-sm font-medium text-rose-900">
+                  <span className="text-sm font-medium text-black">
                     Cap. {chapter.order} — {chapter.title}
                   </span>
                 </div>
@@ -241,7 +241,7 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-700">
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>💞</span> Relaciones
         </h3>
         <ul className="mb-4 flex flex-col gap-1 text-sm">
@@ -284,7 +284,7 @@ export default async function CharacterDetailPage({
         </ul>
 
         <form action={addRelation} className="flex max-w-lg flex-wrap items-end gap-2">
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             {character.name}
             <select name="type" className={input}>
               {Object.entries(relationLabels).map(([value, label]) => (
@@ -294,7 +294,7 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Personaje
             <select name="toId" required className={input}>
               {otherCharacters.map((c) => (
@@ -304,7 +304,7 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Nota
             <input name="note" className={input} />
           </label>

@@ -38,7 +38,7 @@ export default async function ItemsPage({
         {items.map((item) => (
           <div key={item.id} className={card}>
             <div className="flex items-start justify-between">
-              <p className="flex items-center gap-2 font-semibold text-rose-700">
+              <p className="flex items-center gap-2 font-semibold text-black">
                 <span aria-hidden>🗝️</span> {item.name}
               </p>
               <form
@@ -79,19 +79,19 @@ export default async function ItemsPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>✨</span> Nuevo objeto
         </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Nombre
             <input name="name" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Descripción (opcional)
             <textarea name="description" rows={2} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Dueño (opcional)
             <select name="ownerId" className={input}>
               <option value="">— Ninguno —</option>
@@ -102,7 +102,7 @@ export default async function ItemsPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Ubicación (opcional)
             <select name="locationId" className={input}>
               <option value="">— Ninguna —</option>

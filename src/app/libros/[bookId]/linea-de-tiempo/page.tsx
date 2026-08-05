@@ -44,7 +44,7 @@ export default async function TimelinePage({
                   ⏳ #{event.order}
                   {event.location && <> · 📍 {event.location.name}</>}
                 </p>
-                <p className="font-semibold text-rose-700">{event.title}</p>
+                <p className="font-semibold text-black">{event.title}</p>
                 {event.description && (
                   <p className={`mt-1 text-sm ${muted}`}>{event.description}</p>
                 )}
@@ -83,11 +83,11 @@ export default async function TimelinePage({
       </ol>
 
       <div className={`max-w-lg ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>✨</span> Nuevo evento
         </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Orden cronológico
             <input
               name="order"
@@ -97,15 +97,15 @@ export default async function TimelinePage({
               className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Título
             <input name="title" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Descripción (opcional)
             <textarea name="description" rows={2} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Ubicación (opcional)
             <select name="locationId" className={input}>
               <option value="">— Ninguna —</option>
@@ -116,7 +116,7 @@ export default async function TimelinePage({
               ))}
             </select>
           </label>
-          <fieldset className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <fieldset className="flex flex-col gap-1 text-sm text-black/70">
             <legend>Personajes involucrados</legend>
             <div className={`flex max-h-40 flex-col gap-1 overflow-y-auto ${input}`}>
               {characters.map((c) => (

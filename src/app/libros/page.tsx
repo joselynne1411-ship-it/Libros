@@ -26,7 +26,7 @@ export default async function LibrosPage() {
       <div className="mb-10 grid gap-4 sm:grid-cols-2">
         {books.map((book) => (
           <Link key={book.id} href={`/libros/${book.id}`} className={cardHover}>
-            <h2 className="flex items-center gap-2 font-semibold text-rose-700">
+            <h2 className="flex items-center gap-2 font-semibold text-black">
               <span aria-hidden>📖</span> {book.title}
             </h2>
             {book.description && (
@@ -48,7 +48,7 @@ export default async function LibrosPage() {
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>✨</span> Nuevo libro
         </h2>
         <form action={createBookAction} className="flex flex-col gap-3">

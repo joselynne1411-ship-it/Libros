@@ -48,14 +48,14 @@ export default async function LocationsPage({
       )}
 
       <form action={uploadMap} className="flex items-end gap-3">
-        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+        <label className="flex flex-col gap-1 text-sm text-black/70">
           {book.mapImageUrl ? "Reemplazar mapa" : "Subir mapa"}
           <input
             name="file"
             type="file"
             accept="image/png,image/jpeg,image/webp,image/gif"
             required
-            className="text-sm text-rose-900/70 file:mr-3 file:rounded-full file:border-0 file:bg-pink-100 file:px-3 file:py-1.5 file:text-pink-700"
+            className="text-sm text-black/70 file:mr-3 file:rounded-full file:border-0 file:bg-pink-100 file:px-3 file:py-1.5 file:text-pink-700"
           />
         </label>
         <SubmitButton>Subir</SubmitButton>
@@ -65,7 +65,7 @@ export default async function LocationsPage({
         {locations.map((l) => (
           <div key={l.id} className={`flex items-start justify-between gap-4 ${card}`}>
             <div>
-              <p className="flex items-center gap-2 font-semibold text-rose-700">
+              <p className="flex items-center gap-2 font-semibold text-black">
                 <span aria-hidden>📍</span> {l.name}
               </p>
               {l.description && (
@@ -87,15 +87,15 @@ export default async function LocationsPage({
       </div>
 
       <div className={`max-w-md ${card}`}>
-        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-700">
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-black">
           <span aria-hidden>✨</span> Nueva ubicación
         </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Nombre
             <input name="name" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+          <label className="flex flex-col gap-1 text-sm text-black/70">
             Descripción (opcional)
             <textarea name="description" rows={2} className={input} />
           </label>

@@ -66,7 +66,7 @@ export function MapEditor({
       </div>
 
       <div className="flex w-full max-w-xs flex-col gap-1">
-        <p className="mb-1 text-sm text-rose-900/50">
+        <p className="mb-1 text-sm text-black/50">
           {selected
             ? `Haz clic en el mapa para ubicar a "${selected.name}"${isPending ? "…" : ""}`
             : "Selecciona una ubicación y luego haz clic en el mapa para colocarla."}

@@ -25,11 +25,11 @@ export default async function BookOverviewPage({
   return (
     <div className="flex max-w-md flex-col gap-6">
       <form action={update} className="flex flex-col gap-3">
-        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+        <label className="flex flex-col gap-1 text-sm text-black/70">
           Título
           <input name="title" defaultValue={book.title} required className={input} />
         </label>
-        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
+        <label className="flex flex-col gap-1 text-sm text-black/70">
           Descripción
           <textarea
             name="description"
