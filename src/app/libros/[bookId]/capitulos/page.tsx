@@ -5,6 +5,7 @@ import {
   deleteChapterAction,
 } from "@/lib/actions/chapters";
 import { SubmitButton } from "@/components/SubmitButton";
+import { card, input, muted, dangerLink } from "@/lib/ui";
 
 export default async function ChaptersPage({
   params,
@@ -32,20 +33,18 @@ export default async function ChaptersPage({
         {chapters.map((chapter) => (
           <div
             key={chapter.id}
-            className="flex items-start justify-between gap-4 rounded-lg border border-black/10 p-3 dark:border-white/10"
+            className={`flex items-start justify-between gap-4 ${card}`}
           >
             <div>
-              <p className="text-sm text-black/50 dark:text-white/50">
-                Cap. {chapter.order}
+              <p className={`text-xs font-medium ${muted}`}>
+                📖 Cap. {chapter.order}
               </p>
-              <p className="font-medium">{chapter.title}</p>
+              <p className="font-semibold text-rose-950">{chapter.title}</p>
               {chapter.summary && (
-                <p className="mt-1 text-sm text-black/60 dark:text-white/60">
-                  {chapter.summary}
-                </p>
+                <p className={`mt-1 text-sm ${muted}`}>{chapter.summary}</p>
               )}
-              <p className="mt-1 text-xs text-black/50 dark:text-white/50">
-                {chapter._count.appearances} personajes aparecen aquí
+              <p className={`mt-1 text-xs ${muted}`}>
+                👤 {chapter._count.appearances} personajes aparecen aquí
               </p>
             </div>
             <form
@@ -54,50 +53,39 @@ export default async function ChaptersPage({
                 await deleteChapterAction(bookId, chapter.id);
               }}
             >
-              <button
-                type="submit"
-                className="text-sm text-red-600 hover:underline"
-              >
+              <button type="submit" className={dangerLink}>
                 Eliminar
               </button>
             </form>
           </div>
         ))}
         {chapters.length === 0 && (
-          <p className="text-sm text-black/60 dark:text-white/60">
-            Todavía no hay capítulos.
-          </p>
+          <p className={`text-sm ${muted}`}>Todavía no hay capítulos.</p>
         )}
       </div>
 
-      <div className="max-w-md rounded-lg border border-black/10 p-4 dark:border-white/10">
-        <h2 className="mb-3 font-medium">Nuevo capítulo</h2>
+      <div className={`max-w-md ${card}`}>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>✨</span> Nuevo capítulo
+        </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Número
             <input
               name="order"
               type="number"
               defaultValue={chapters.length + 1}
               required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
+              className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Título
-            <input
-              name="title"
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="title" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Resumen (opcional)
-            <textarea
-              name="summary"
-              rows={2}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <textarea name="summary" rows={2} className={input} />
           </label>
           <SubmitButton>Añadir capítulo</SubmitButton>
         </form>

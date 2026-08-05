@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUserId, requireBook } from "@/lib/session";
 import { createItemAction, deleteItemAction } from "@/lib/actions/items";
 import { SubmitButton } from "@/components/SubmitButton";
+import { card, input, muted, link, dangerLink } from "@/lib/ui";
 
 export default async function ItemsPage({
   params,
@@ -35,38 +36,32 @@ export default async function ItemsPage({
     <div className="flex flex-col gap-6">
       <div className="grid gap-3 sm:grid-cols-2">
         {items.map((item) => (
-          <div
-            key={item.id}
-            className="rounded-lg border border-black/10 p-3 dark:border-white/10"
-          >
+          <div key={item.id} className={card}>
             <div className="flex items-start justify-between">
-              <p className="font-medium">{item.name}</p>
+              <p className="flex items-center gap-2 font-semibold text-rose-950">
+                <span aria-hidden>🗝️</span> {item.name}
+              </p>
               <form
                 action={async () => {
                   "use server";
                   await deleteItemAction(bookId, item.id);
                 }}
               >
-                <button
-                  type="submit"
-                  className="text-sm text-red-600 hover:underline"
-                >
+                <button type="submit" className={dangerLink}>
                   Eliminar
                 </button>
               </form>
             </div>
             {item.description && (
-              <p className="mt-1 text-sm text-black/60 dark:text-white/60">
-                {item.description}
-              </p>
+              <p className={`mt-1 text-sm ${muted}`}>{item.description}</p>
             )}
-            <p className="mt-2 text-xs text-black/50 dark:text-white/50">
+            <p className={`mt-2 text-xs ${muted}`}>
               {item.owner ? (
                 <>
                   Poseído por{" "}
                   <Link
                     href={`/libros/${bookId}/personajes/${item.owner.id}`}
-                    className="text-indigo-600 hover:underline"
+                    className={link}
                   >
                     {item.owner.name}
                   </Link>
@@ -79,37 +74,26 @@ export default async function ItemsPage({
           </div>
         ))}
         {items.length === 0 && (
-          <p className="text-sm text-black/60 dark:text-white/60">
-            Todavía no hay objetos.
-          </p>
+          <p className={`text-sm ${muted}`}>Todavía no hay objetos.</p>
         )}
       </div>
 
-      <div className="max-w-md rounded-lg border border-black/10 p-4 dark:border-white/10">
-        <h2 className="mb-3 font-medium">Nuevo objeto</h2>
+      <div className={`max-w-md ${card}`}>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>✨</span> Nuevo objeto
+        </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Nombre
-            <input
-              name="name"
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="name" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Descripción (opcional)
-            <textarea
-              name="description"
-              rows={2}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <textarea name="description" rows={2} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Dueño (opcional)
-            <select
-              name="ownerId"
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="ownerId" className={input}>
               <option value="">— Ninguno —</option>
               {characters.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -118,12 +102,9 @@ export default async function ItemsPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Ubicación (opcional)
-            <select
-              name="locationId"
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="locationId" className={input}>
               <option value="">— Ninguna —</option>
               {locations.map((l) => (
                 <option key={l.id} value={l.id}>

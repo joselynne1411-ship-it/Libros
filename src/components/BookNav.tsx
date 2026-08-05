@@ -4,13 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const tabs = [
-  { href: "", label: "Resumen" },
-  { href: "/personajes", label: "Personajes" },
-  { href: "/arbol-genealogico", label: "Árbol genealógico" },
-  { href: "/ubicaciones", label: "Ubicaciones" },
-  { href: "/linea-de-tiempo", label: "Línea de tiempo" },
-  { href: "/objetos", label: "Objetos" },
-  { href: "/capitulos", label: "Capítulos" },
+  { href: "", label: "Resumen", icon: "🏠" },
+  { href: "/personajes", label: "Personajes", icon: "👤" },
+  { href: "/arbol-genealogico", label: "Árbol genealógico", icon: "🌳" },
+  { href: "/ubicaciones", label: "Ubicaciones", icon: "🗺️" },
+  { href: "/linea-de-tiempo", label: "Línea de tiempo", icon: "⏳" },
+  { href: "/objetos", label: "Objetos", icon: "🗝️" },
+  { href: "/capitulos", label: "Capítulos", icon: "📖" },
 ];
 
 export function BookNav({ bookId }: { bookId: string }) {
@@ -18,7 +18,7 @@ export function BookNav({ bookId }: { bookId: string }) {
   const base = `/libros/${bookId}`;
 
   return (
-    <nav className="flex flex-wrap gap-1 border-b border-black/10 px-4 dark:border-white/10">
+    <nav className="flex flex-wrap gap-1 border-b border-pink-100 px-4">
       {tabs.map((tab) => {
         const href = `${base}${tab.href}`;
         const active =
@@ -27,13 +27,13 @@ export function BookNav({ bookId }: { bookId: string }) {
           <Link
             key={tab.href}
             href={href}
-            className={`rounded-t-md px-3 py-2 text-sm ${
+            className={`flex items-center gap-1.5 rounded-t-lg px-3 py-2 text-sm transition ${
               active
-                ? "border-b-2 border-indigo-600 font-medium text-indigo-600"
-                : "text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white"
+                ? "border-b-2 border-pink-500 font-medium text-pink-600"
+                : "text-rose-900/50 hover:text-rose-900"
             }`}
           >
-            {tab.label}
+            <span aria-hidden>{tab.icon}</span> {tab.label}
           </Link>
         );
       })}

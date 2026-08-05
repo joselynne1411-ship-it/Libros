@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { requireUserId, requireBook } from "@/lib/session";
 import { relationLabels } from "@/lib/labels";
+import { muted, link } from "@/lib/ui";
 
 type CharacterNode = {
   id: string;
@@ -63,7 +64,9 @@ export default async function FamilyTreePage({
   return (
     <div className="flex flex-col gap-8">
       <section>
-        <h2 className="mb-3 font-medium">Árbol genealógico</h2>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>🌳</span> Árbol genealógico
+        </h2>
         {roots.length > 0 ? (
           <ul className="flex flex-col gap-1">
             {roots.map((node) => (
@@ -71,7 +74,7 @@ export default async function FamilyTreePage({
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-black/60 dark:text-white/60">
+          <p className={`text-sm ${muted}`}>
             Registra relaciones de tipo &quot;es padre/madre de&quot; en la
             ficha de un personaje para construir el árbol.
           </p>
@@ -79,37 +82,26 @@ export default async function FamilyTreePage({
       </section>
 
       <section>
-        <h2 className="mb-3 font-medium">Otras relaciones</h2>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>💞</span> Otras relaciones
+        </h2>
         {otherRelations.length > 0 ? (
           <ul className="flex flex-col gap-1 text-sm">
             {otherRelations.map((r) => (
               <li key={r.id}>
-                <Link
-                  href={`/libros/${bookId}/personajes/${r.from.id}`}
-                  className="text-indigo-600 hover:underline"
-                >
+                <Link href={`/libros/${bookId}/personajes/${r.from.id}`} className={link}>
                   {r.from.name}
                 </Link>{" "}
                 {relationLabels[r.type]}{" "}
-                <Link
-                  href={`/libros/${bookId}/personajes/${r.to.id}`}
-                  className="text-indigo-600 hover:underline"
-                >
+                <Link href={`/libros/${bookId}/personajes/${r.to.id}`} className={link}>
                   {r.to.name}
                 </Link>
-                {r.note && (
-                  <span className="text-black/50 dark:text-white/50">
-                    {" "}
-                    — {r.note}
-                  </span>
-                )}
+                {r.note && <span className={muted}> — {r.note}</span>}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-black/60 dark:text-white/60">
-            Sin otras relaciones registradas.
-          </p>
+          <p className={`text-sm ${muted}`}>Sin otras relaciones registradas.</p>
         )}
       </section>
     </div>
@@ -127,14 +119,11 @@ function TreeNode({
 }) {
   return (
     <li style={{ marginLeft: depth * 20 }}>
-      <Link
-        href={`/libros/${bookId}/personajes/${node.id}`}
-        className="text-indigo-600 hover:underline"
-      >
-        {node.name}
+      <Link href={`/libros/${bookId}/personajes/${node.id}`} className={link}>
+        👤 {node.name}
       </Link>
       {node.children.length > 0 && (
-        <ul className="mt-1 flex flex-col gap-1 border-l border-black/10 pl-3 dark:border-white/10">
+        <ul className="mt-1 flex flex-col gap-1 border-l-2 border-pink-100 pl-3">
           {node.children.map((child) => (
             <TreeNode key={child.id} node={child} bookId={bookId} depth={0} />
           ))}

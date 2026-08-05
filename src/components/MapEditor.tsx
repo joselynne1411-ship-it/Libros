@@ -38,7 +38,7 @@ export function MapEditor({
     <div className="flex flex-col gap-3 md:flex-row">
       <div
         onClick={handleMapClick}
-        className={`relative w-full max-w-2xl overflow-hidden rounded-lg border border-black/10 dark:border-white/10 ${
+        className={`relative w-full max-w-2xl overflow-hidden rounded-2xl border border-pink-100 shadow-sm shadow-pink-100 ${
           selectedId ? "cursor-crosshair" : ""
         }`}
       >
@@ -56,7 +56,7 @@ export function MapEditor({
               }}
               title={l.name}
               style={{ left: `${l.xPercent}%`, top: `${l.yPercent}%` }}
-              className={`absolute -translate-x-1/2 -translate-y-full text-lg drop-shadow ${
+              className={`absolute -translate-x-1/2 -translate-y-full text-lg drop-shadow transition ${
                 selectedId === l.id ? "scale-125" : ""
               }`}
             >
@@ -66,7 +66,7 @@ export function MapEditor({
       </div>
 
       <div className="flex w-full max-w-xs flex-col gap-1">
-        <p className="mb-1 text-sm text-black/60 dark:text-white/60">
+        <p className="mb-1 text-sm text-rose-900/50">
           {selected
             ? `Haz clic en el mapa para ubicar a "${selected.name}"${isPending ? "…" : ""}`
             : "Selecciona una ubicación y luego haz clic en el mapa para colocarla."}
@@ -76,13 +76,13 @@ export function MapEditor({
             key={l.id}
             type="button"
             onClick={() => setSelectedId(l.id === selectedId ? null : l.id)}
-            className={`flex items-center justify-between rounded-md border px-2 py-1 text-left text-sm ${
+            className={`flex items-center justify-between rounded-xl border px-2 py-1.5 text-left text-sm transition ${
               selectedId === l.id
-                ? "border-indigo-600 bg-indigo-50 dark:bg-indigo-950"
-                : "border-black/10 dark:border-white/10"
+                ? "border-pink-400 bg-pink-50"
+                : "border-pink-100 hover:border-pink-300"
             }`}
           >
-            <span>{l.name}</span>
+            <span className="flex items-center gap-1.5">📍 {l.name}</span>
             {l.xPercent == null && (
               <span className="text-xs text-amber-600">sin ubicar</span>
             )}

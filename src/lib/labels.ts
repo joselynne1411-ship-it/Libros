@@ -5,11 +5,18 @@ export const statusLabels: Record<string, string> = {
   UNKNOWN: "Desconocido",
 };
 
+export const statusIcons: Record<string, string> = {
+  ALIVE: "💗",
+  DECEASED: "🕊️",
+  MISSING: "❓",
+  UNKNOWN: "🌫️",
+};
+
 export const statusColors: Record<string, string> = {
-  ALIVE: "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300",
-  DECEASED: "bg-zinc-200 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300",
-  MISSING: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
-  UNKNOWN: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300",
+  ALIVE: "bg-green-100 text-green-700",
+  DECEASED: "bg-zinc-200 text-zinc-700",
+  MISSING: "bg-amber-100 text-amber-700",
+  UNKNOWN: "bg-blue-100 text-blue-700",
 };
 
 export const relationLabels: Record<string, string> = {

@@ -15,8 +15,8 @@ export default async function BookLayout({
   return (
     <div className="flex flex-col">
       <div className="px-4 pt-6">
-        <h1 className="mx-auto max-w-5xl text-xl font-semibold">
-          {book.title}
+        <h1 className="mx-auto flex max-w-5xl items-center gap-2 text-xl font-bold text-rose-950">
+          <span aria-hidden>📖</span> {book.title}
         </h1>
       </div>
       <div className="mx-auto w-full max-w-5xl">

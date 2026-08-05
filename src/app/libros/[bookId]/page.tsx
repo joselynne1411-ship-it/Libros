@@ -1,6 +1,7 @@
 import { requireUserId, requireBook } from "@/lib/session";
 import { updateBookAction, deleteBookAction } from "@/lib/actions/books";
 import { SubmitButton } from "@/components/SubmitButton";
+import { input, muted, dangerButton } from "@/lib/ui";
 
 export default async function BookOverviewPage({
   params,
@@ -24,36 +25,28 @@ export default async function BookOverviewPage({
   return (
     <div className="flex max-w-md flex-col gap-6">
       <form action={update} className="flex flex-col gap-3">
-        <label className="flex flex-col gap-1 text-sm">
+        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
           Título
-          <input
-            name="title"
-            defaultValue={book.title}
-            required
-            className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-          />
+          <input name="title" defaultValue={book.title} required className={input} />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
+        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
           Descripción
           <textarea
             name="description"
             defaultValue={book.description ?? ""}
             rows={4}
-            className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
+            className={input}
           />
         </label>
         <SubmitButton className="self-start">Guardar cambios</SubmitButton>
       </form>
 
-      <form action={remove} className="border-t border-black/10 pt-4 dark:border-white/10">
-        <p className="mb-2 text-sm text-black/60 dark:text-white/60">
+      <form action={remove} className="border-t border-pink-100 pt-4">
+        <p className={`mb-2 text-sm ${muted}`}>
           Eliminar este libro borrará también sus personajes, ubicaciones,
           eventos y objetos.
         </p>
-        <button
-          type="submit"
-          className="rounded-md border border-red-600 px-4 py-2 text-sm text-red-600 hover:bg-red-600 hover:text-white"
-        >
+        <button type="submit" className={dangerButton}>
           Eliminar libro
         </button>
       </form>

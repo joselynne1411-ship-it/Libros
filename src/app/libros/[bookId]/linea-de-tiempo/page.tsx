@@ -6,6 +6,7 @@ import {
   deleteTimelineEventAction,
 } from "@/lib/actions/timeline";
 import { SubmitButton } from "@/components/SubmitButton";
+import { card, input, muted, dangerLink } from "@/lib/ui";
 
 export default async function TimelinePage({
   params,
@@ -33,21 +34,19 @@ export default async function TimelinePage({
 
   return (
     <div className="flex flex-col gap-8">
-      <ol className="flex flex-col gap-3 border-l border-black/10 pl-4 dark:border-white/10">
+      <ol className="flex flex-col gap-3 border-l-2 border-pink-200 pl-4">
         {events.map((event) => (
           <li key={event.id} className="relative">
-            <span className="absolute -left-[21px] top-1 h-2.5 w-2.5 rounded-full bg-indigo-600" />
-            <div className="flex items-start justify-between gap-4 rounded-lg border border-black/10 p-3 dark:border-white/10">
+            <span className="absolute -left-[21px] top-1 h-3 w-3 rounded-full bg-pink-500 ring-4 ring-pink-100" />
+            <div className={`flex items-start justify-between gap-4 ${card}`}>
               <div>
-                <p className="text-xs text-black/50 dark:text-white/50">
-                  #{event.order}
-                  {event.location && <> · {event.location.name}</>}
+                <p className={`text-xs ${muted}`}>
+                  ⏳ #{event.order}
+                  {event.location && <> · 📍 {event.location.name}</>}
                 </p>
-                <p className="font-medium">{event.title}</p>
+                <p className="font-semibold text-rose-950">{event.title}</p>
                 {event.description && (
-                  <p className="mt-1 text-sm text-black/60 dark:text-white/60">
-                    {event.description}
-                  </p>
+                  <p className={`mt-1 text-sm ${muted}`}>{event.description}</p>
                 )}
                 {event.characters.length > 0 && (
                   <p className="mt-2 flex flex-wrap gap-2 text-xs">
@@ -55,7 +54,7 @@ export default async function TimelinePage({
                       <Link
                         key={character.id}
                         href={`/libros/${bookId}/personajes/${character.id}`}
-                        className="rounded-full bg-black/5 px-2 py-0.5 text-indigo-600 hover:underline dark:bg-white/10"
+                        className="rounded-full bg-pink-50 px-2 py-0.5 text-pink-700 hover:underline"
                       >
                         {character.name}
                       </Link>
@@ -69,10 +68,7 @@ export default async function TimelinePage({
                   await deleteTimelineEventAction(bookId, event.id);
                 }}
               >
-                <button
-                  type="submit"
-                  className="text-sm text-red-600 hover:underline"
-                >
+                <button type="submit" className={dangerLink}>
                   Eliminar
                 </button>
               </form>
@@ -80,47 +76,38 @@ export default async function TimelinePage({
           </li>
         ))}
         {events.length === 0 && (
-          <p className="text-sm text-black/60 dark:text-white/60">
+          <p className={`text-sm ${muted}`}>
             Todavía no hay eventos en la línea de tiempo.
           </p>
         )}
       </ol>
 
-      <div className="max-w-lg rounded-lg border border-black/10 p-4 dark:border-white/10">
-        <h2 className="mb-3 font-medium">Nuevo evento</h2>
+      <div className={`max-w-lg ${card}`}>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>✨</span> Nuevo evento
+        </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Orden cronológico
             <input
               name="order"
               type="number"
               defaultValue={events.length + 1}
               required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
+              className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Título
-            <input
-              name="title"
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="title" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Descripción (opcional)
-            <textarea
-              name="description"
-              rows={2}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <textarea name="description" rows={2} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Ubicación (opcional)
-            <select
-              name="locationId"
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="locationId" className={input}>
               <option value="">— Ninguna —</option>
               {locations.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -129,9 +116,9 @@ export default async function TimelinePage({
               ))}
             </select>
           </label>
-          <fieldset className="flex flex-col gap-1 text-sm">
+          <fieldset className="flex flex-col gap-1 text-sm text-rose-900/70">
             <legend>Personajes involucrados</legend>
-            <div className="flex max-h-40 flex-col gap-1 overflow-y-auto rounded-md border border-black/10 p-2 dark:border-white/20">
+            <div className={`flex max-h-40 flex-col gap-1 overflow-y-auto ${input}`}>
               {characters.map((c) => (
                 <label key={c.id} className="flex items-center gap-2">
                   <input type="checkbox" name="characterIds" value={c.id} />
@@ -139,9 +126,7 @@ export default async function TimelinePage({
                 </label>
               ))}
               {characters.length === 0 && (
-                <p className="text-black/50 dark:text-white/50">
-                  Sin personajes todavía.
-                </p>
+                <p className={muted}>Sin personajes todavía.</p>
               )}
             </div>
           </fieldset>

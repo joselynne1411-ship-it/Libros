@@ -7,6 +7,7 @@ import {
 } from "@/lib/actions/locations";
 import { SubmitButton } from "@/components/SubmitButton";
 import { MapEditor } from "@/components/MapEditor";
+import { card, input, muted, dangerLink } from "@/lib/ui";
 
 export default async function LocationsPage({
   params,
@@ -41,20 +42,20 @@ export default async function LocationsPage({
           locations={locations}
         />
       ) : (
-        <p className="text-sm text-black/60 dark:text-white/60">
-          Sube una imagen de mapa para poder ubicar tus lugares sobre ella.
+        <p className={`text-sm ${muted}`}>
+          🗺️ Sube una imagen de mapa para poder ubicar tus lugares sobre ella.
         </p>
       )}
 
       <form action={uploadMap} className="flex items-end gap-3">
-        <label className="flex flex-col gap-1 text-sm">
+        <label className="flex flex-col gap-1 text-sm text-rose-900/70">
           {book.mapImageUrl ? "Reemplazar mapa" : "Subir mapa"}
           <input
             name="file"
             type="file"
             accept="image/png,image/jpeg,image/webp,image/gif"
             required
-            className="text-sm"
+            className="text-sm text-rose-900/70 file:mr-3 file:rounded-full file:border-0 file:bg-pink-100 file:px-3 file:py-1.5 file:text-pink-700"
           />
         </label>
         <SubmitButton>Subir</SubmitButton>
@@ -62,16 +63,13 @@ export default async function LocationsPage({
 
       <div className="flex flex-col gap-2">
         {locations.map((l) => (
-          <div
-            key={l.id}
-            className="flex items-start justify-between gap-4 rounded-lg border border-black/10 p-3 dark:border-white/10"
-          >
+          <div key={l.id} className={`flex items-start justify-between gap-4 ${card}`}>
             <div>
-              <p className="font-medium">{l.name}</p>
+              <p className="flex items-center gap-2 font-semibold text-rose-950">
+                <span aria-hidden>📍</span> {l.name}
+              </p>
               {l.description && (
-                <p className="mt-1 text-sm text-black/60 dark:text-white/60">
-                  {l.description}
-                </p>
+                <p className={`mt-1 text-sm ${muted}`}>{l.description}</p>
               )}
             </div>
             <form
@@ -80,10 +78,7 @@ export default async function LocationsPage({
                 await deleteLocationAction(bookId, l.id);
               }}
             >
-              <button
-                type="submit"
-                className="text-sm text-red-600 hover:underline"
-              >
+              <button type="submit" className={dangerLink}>
                 Eliminar
               </button>
             </form>
@@ -91,24 +86,18 @@ export default async function LocationsPage({
         ))}
       </div>
 
-      <div className="max-w-md rounded-lg border border-black/10 p-4 dark:border-white/10">
-        <h2 className="mb-3 font-medium">Nueva ubicación</h2>
+      <div className={`max-w-md ${card}`}>
+        <h2 className="mb-3 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>✨</span> Nueva ubicación
+        </h2>
         <form action={create} className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Nombre
-            <input
-              name="name"
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="name" required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Descripción (opcional)
-            <textarea
-              name="description"
-              rows={2}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <textarea name="description" rows={2} className={input} />
           </label>
           <SubmitButton>Crear ubicación</SubmitButton>
         </form>

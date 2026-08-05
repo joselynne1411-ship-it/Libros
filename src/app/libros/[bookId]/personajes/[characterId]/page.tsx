@@ -11,7 +11,8 @@ import {
   deleteRelationAction,
 } from "@/lib/actions/characters";
 import { SubmitButton } from "@/components/SubmitButton";
-import { statusLabels, statusColors, relationLabels } from "@/lib/labels";
+import { statusLabels, statusColors, statusIcons, relationLabels } from "@/lib/labels";
+import { card, input, muted, link, dangerButton, dangerLink } from "@/lib/ui";
 
 export default async function CharacterDetailPage({
   params,
@@ -67,56 +68,45 @@ export default async function CharacterDetailPage({
     <div className="flex flex-col gap-8">
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-lg font-semibold">{character.name}</h2>
+          <h2 className="flex items-center gap-2 text-lg font-bold text-rose-950">
+            <span aria-hidden>👤</span> {character.name}
+          </h2>
           {character.alias && (
-            <p className="text-sm text-black/50 dark:text-white/50">
-              “{character.alias}”
-            </p>
+            <p className={`text-sm ${muted}`}>“{character.alias}”</p>
           )}
         </div>
         <span
-          className={`rounded-full px-2 py-0.5 text-xs ${statusColors[character.status]}`}
+          className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${statusColors[character.status]}`}
         >
-          {statusLabels[character.status]}
+          {statusIcons[character.status]} {statusLabels[character.status]}
         </span>
       </div>
 
       <section className="grid gap-8 md:grid-cols-2">
         <form action={update} className="flex flex-col gap-3">
-          <h3 className="font-medium">Ficha</h3>
-          <label className="flex flex-col gap-1 text-sm">
+          <h3 className="flex items-center gap-2 font-semibold text-rose-950">
+            <span aria-hidden>📝</span> Ficha
+          </h3>
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Nombre
-            <input
-              name="name"
-              defaultValue={character.name}
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="name" defaultValue={character.name} required className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Alias
-            <input
-              name="alias"
-              defaultValue={character.alias ?? ""}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="alias" defaultValue={character.alias ?? ""} className={input} />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Descripción
             <textarea
               name="description"
               defaultValue={character.description ?? ""}
               rows={4}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
+              className={input}
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Estado actual
-            <select
-              name="status"
-              defaultValue={character.status}
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="status" defaultValue={character.status} className={input}>
               {Object.entries(statusLabels).map(([value, label]) => (
                 <option key={value} value={value}>
                   {label}
@@ -124,13 +114,13 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Nota sobre el estado
             <input
               name="statusNote"
               defaultValue={character.statusNote ?? ""}
               placeholder='p.ej. "Herido tras la batalla del cap. 12"'
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
+              className={input}
             />
           </label>
           <SubmitButton className="self-start">Guardar</SubmitButton>
@@ -138,32 +128,26 @@ export default async function CharacterDetailPage({
 
         <div className="flex flex-col gap-4">
           <div>
-            <h3 className="mb-2 font-medium">Objetos que posee</h3>
+            <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+              <span aria-hidden>🗝️</span> Objetos que posee
+            </h3>
             {character.itemsOwned.length > 0 ? (
               <ul className="flex flex-col gap-1 text-sm">
                 {character.itemsOwned.map((item) => (
                   <li key={item.id}>
-                    <Link
-                      href={`/libros/${bookId}/objetos`}
-                      className="text-indigo-600 hover:underline"
-                    >
+                    <Link href={`/libros/${bookId}/objetos`} className={link}>
                       {item.name}
                     </Link>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-black/60 dark:text-white/60">
-                Ningún objeto asignado todavía.
-              </p>
+              <p className={`text-sm ${muted}`}>Ningún objeto asignado todavía.</p>
             )}
           </div>
 
-          <form action={remove} className="border-t border-black/10 pt-4 dark:border-white/10">
-            <button
-              type="submit"
-              className="rounded-md border border-red-600 px-4 py-2 text-sm text-red-600 hover:bg-red-600 hover:text-white"
-            >
+          <form action={remove} className="border-t border-pink-100 pt-4">
+            <button type="submit" className={dangerButton}>
               Eliminar personaje
             </button>
           </form>
@@ -171,8 +155,10 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 font-medium">Aparición en capítulos</h3>
-        <p className="mb-3 text-sm text-black/60 dark:text-white/60">
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>📖</span> Aparición en capítulos
+        </h3>
+        <p className={`mb-3 text-sm ${muted}`}>
           Marca en qué capítulos aparece {character.name} y anota su estado en
           ese punto de la historia.
         </p>
@@ -180,10 +166,7 @@ export default async function CharacterDetailPage({
           {chapters.map((chapter) => {
             const appearance = appearanceByChapter.get(chapter.id);
             return (
-              <div
-                key={chapter.id}
-                className="rounded-lg border border-black/10 p-3 dark:border-white/10"
-              >
+              <div key={chapter.id} className={card}>
                 <div className="flex items-center gap-3">
                   <form
                     action={async () => {
@@ -198,16 +181,16 @@ export default async function CharacterDetailPage({
                   >
                     <button
                       type="submit"
-                      className={`rounded-md border px-2 py-1 text-xs ${
+                      className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                         appearance
-                          ? "border-indigo-600 bg-indigo-600 text-white"
-                          : "border-black/20 dark:border-white/20"
+                          ? "border-pink-500 bg-pink-500 text-white"
+                          : "border-pink-200 text-rose-900/60 hover:border-pink-400"
                       }`}
                     >
-                      {appearance ? "Aparece" : "No aparece"}
+                      {appearance ? "✓ Aparece" : "No aparece"}
                     </button>
                   </form>
-                  <span className="text-sm font-medium">
+                  <span className="text-sm font-medium text-rose-950">
                     Cap. {chapter.order} — {chapter.title}
                   </span>
                 </div>
@@ -228,18 +211,18 @@ export default async function CharacterDetailPage({
                       name="statusAtPoint"
                       defaultValue={appearance.statusAtPoint ?? ""}
                       placeholder="Estado en este capítulo"
-                      className="rounded-md border border-black/10 px-2 py-1 text-sm dark:border-white/20"
+                      className={`${input} py-1.5`}
                     />
                     <div className="flex gap-2">
                       <input
                         name="notes"
                         defaultValue={appearance.notes ?? ""}
                         placeholder="Notas"
-                        className="w-full rounded-md border border-black/10 px-2 py-1 text-sm dark:border-white/20"
+                        className={`w-full ${input} py-1.5`}
                       />
                       <button
                         type="submit"
-                        className="shrink-0 rounded-md border border-black/20 px-2 text-xs dark:border-white/20"
+                        className="shrink-0 rounded-full border border-pink-200 px-3 text-xs text-pink-600 hover:border-pink-400"
                       >
                         Guardar
                       </button>
@@ -250,7 +233,7 @@ export default async function CharacterDetailPage({
             );
           })}
           {chapters.length === 0 && (
-            <p className="text-sm text-black/60 dark:text-white/60">
+            <p className={`text-sm ${muted}`}>
               Crea capítulos primero para poder marcar apariciones.
             </p>
           )}
@@ -258,24 +241,18 @@ export default async function CharacterDetailPage({
       </section>
 
       <section>
-        <h3 className="mb-2 font-medium">Relaciones</h3>
+        <h3 className="mb-2 flex items-center gap-2 font-semibold text-rose-950">
+          <span aria-hidden>💞</span> Relaciones
+        </h3>
         <ul className="mb-4 flex flex-col gap-1 text-sm">
           {character.relationsFrom.map((r) => (
             <li key={r.id} className="flex items-center gap-2">
               <span>
                 {character.name} {relationLabels[r.type]}{" "}
-                <Link
-                  href={`/libros/${bookId}/personajes/${r.to.id}`}
-                  className="text-indigo-600 hover:underline"
-                >
+                <Link href={`/libros/${bookId}/personajes/${r.to.id}`} className={link}>
                   {r.to.name}
                 </Link>
-                {r.note && (
-                  <span className="text-black/50 dark:text-white/50">
-                    {" "}
-                    — {r.note}
-                  </span>
-                )}
+                {r.note && <span className={muted}> — {r.note}</span>}
               </span>
               <form
                 action={async () => {
@@ -283,10 +260,7 @@ export default async function CharacterDetailPage({
                   await deleteRelationAction(bookId, characterId, r.id);
                 }}
               >
-                <button
-                  type="submit"
-                  className="text-xs text-red-600 hover:underline"
-                >
+                <button type="submit" className={dangerLink}>
                   quitar
                 </button>
               </form>
@@ -295,40 +269,24 @@ export default async function CharacterDetailPage({
           {character.relationsTo.map((r) => (
             <li key={r.id} className="flex items-center gap-2">
               <span>
-                <Link
-                  href={`/libros/${bookId}/personajes/${r.from.id}`}
-                  className="text-indigo-600 hover:underline"
-                >
+                <Link href={`/libros/${bookId}/personajes/${r.from.id}`} className={link}>
                   {r.from.name}
                 </Link>{" "}
                 {relationLabels[r.type]} {character.name}
-                {r.note && (
-                  <span className="text-black/50 dark:text-white/50">
-                    {" "}
-                    — {r.note}
-                  </span>
-                )}
+                {r.note && <span className={muted}> — {r.note}</span>}
               </span>
             </li>
           ))}
           {character.relationsFrom.length === 0 &&
             character.relationsTo.length === 0 && (
-              <p className="text-black/60 dark:text-white/60">
-                Sin relaciones registradas.
-              </p>
+              <p className={muted}>Sin relaciones registradas.</p>
             )}
         </ul>
 
-        <form
-          action={addRelation}
-          className="flex max-w-lg flex-wrap items-end gap-2"
-        >
-          <label className="flex flex-col gap-1 text-sm">
+        <form action={addRelation} className="flex max-w-lg flex-wrap items-end gap-2">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             {character.name}
-            <select
-              name="type"
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="type" className={input}>
               {Object.entries(relationLabels).map(([value, label]) => (
                 <option key={value} value={value}>
                   {label}
@@ -336,13 +294,9 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Personaje
-            <select
-              name="toId"
-              required
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            >
+            <select name="toId" required className={input}>
               {otherCharacters.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -350,12 +304,9 @@ export default async function CharacterDetailPage({
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-1 text-sm">
+          <label className="flex flex-col gap-1 text-sm text-rose-900/70">
             Nota
-            <input
-              name="note"
-              className="rounded-md border border-black/10 px-3 py-2 dark:border-white/20"
-            />
+            <input name="note" className={input} />
           </label>
           <SubmitButton>Añadir relación</SubmitButton>
         </form>
